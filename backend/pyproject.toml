@@ -1,0 +1,30 @@
+[project]
+name = "pdf-brainrot"
+version = "0.1.0"
+description = "Turn a PDF into a brainrot-style narrated short video, fully offline."
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "python-multipart>=0.0.9",
+    "pymupdf>=1.24",
+    "httpx>=0.27",
+    "kokoro>=0.9.4",
+    "soundfile>=0.12",
+    "numpy>=1.26",
+    # English model Kokoro's G2P loads; pinned so it isn't downloaded on first run.
+    "en-core-web-sm",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
